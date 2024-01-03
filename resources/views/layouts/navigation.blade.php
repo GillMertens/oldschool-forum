@@ -21,12 +21,12 @@
                 </div>
             </div>
 
-            <!-- Settings Dropdown -->
+            @Auth
             <div class="flex items-center ms-6">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                            <div>{{ Auth::user()->name }}</div>
+                            <div>{{ Auth::user()->username }}</div>
 
                             <div class="ms-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -54,6 +54,20 @@
                     </x-slot>
                 </x-dropdown>
             </div>
+            @else
+                <div class="flex items-center">
+                    <a href="{{ route('login') }}">
+                        <x-secondary-button class="ms-4">
+                            {{ __('Log in') }}
+                        </x-secondary-button>
+                    </a>
+                    <a href="{{ route('register') }}">
+                        <x-primary-button class="ms-4">
+                            {{ __('Register') }}
+                        </x-primary-button>
+                    </a>
+                </div>
+            @endauth
         </div>
     </div>
 </nav>
