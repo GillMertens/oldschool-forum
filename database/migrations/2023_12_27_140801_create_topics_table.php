@@ -11,9 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tag', function (Blueprint $table) {
+        Schema::create('topics', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('title');
+            $table->string('color');
+            $table->string('image_url');
+            $table->timestamps();
+
+            $table->foreignId('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
     }
 
@@ -22,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tag');
+        Schema::dropIfExists('topic');
     }
 };

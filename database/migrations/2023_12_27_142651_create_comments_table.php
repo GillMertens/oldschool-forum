@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('comment', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->id();
             $table->string('body');
             $table->timestamps();
 
-            $table->foreignId('topic_id')->nullable()->constrained('topic');
-            $table->foreignId('comment_id')->nullable()->constrained('answer');
-            $table->foreignId('user_id')->constrained('user');
+            $table->foreignId('topic_id')->nullable()->references('id')->on('topics')->onDelete('cascade');
+            $table->foreignId('comment_id')->nullable()->references('id')->on('comments')->onDelete('cascade');
+            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
