@@ -4,11 +4,21 @@
             <div class="custom-sidebar-sections">
 
             </div>
-            <div class="categories">
+            <x-sidebar-section title="Categorieën">
                 @foreach($categories as $category)
-                    <div>{{ $category->name }}</div> <!-- Assuming the category has a 'name' field -->
+                    <div style="display: flex; align-items: center;">
+                        <div style="width: 16px; height: 16px; background-color: #{{ $category->color }}; margin-right: 8px;"></div>
+                        <div>{{ $category->name }}</div>
+                    </div>
                 @endforeach
-            </div>
+            </x-sidebar-section>
+            <x-sidebar-section title="Tags">
+                @foreach($tags as $tag)
+                    <div style="display: flex; align-items: center;">
+                        <div>{{ $tag->name }}</div>
+                    </div>
+                @endforeach
+            </x-sidebar-section>
             <div class="tags">tags</div>
 
         </div>
