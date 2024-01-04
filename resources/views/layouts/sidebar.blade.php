@@ -7,7 +7,7 @@
             <x-sidebar-section title="Categorieën">
                 @foreach($categories as $category)
                     <div style="display: flex; align-items: center;">
-                        <div style="width: 16px; height: 16px; background-color: #{{ $category->color }}; margin-right: 8px;"></div>
+                        <div style="width: 12px; height: 12px; background-color: #{{ $category->color }}; margin-right: 8px;"></div>
                         <div>{{ $category->name }}</div>
                     </div>
                 @endforeach
@@ -19,8 +19,6 @@
                     </div>
                 @endforeach
             </x-sidebar-section>
-            <div class="tags">tags</div>
-
         </div>
     </section>
 </div>
