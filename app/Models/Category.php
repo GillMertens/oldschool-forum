@@ -7,12 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
+    public $timestamps = false;
+
     use HasFactory;
 
     protected $fillable = [
         'name',
         'description',
         'topic_id',
+        'image_url'
     ];
 
     public function topic()

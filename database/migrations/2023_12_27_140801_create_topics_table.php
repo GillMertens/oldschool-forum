@@ -14,10 +14,11 @@ return new class extends Migration
         Schema::create('topics', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('image_url');
+            $table->longText('body');
             $table->timestamps();
 
             $table->foreignId('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

@@ -13,6 +13,7 @@ class Comment extends Model
         'body',
         'user_id',
         'topic_id',
+        'comment_id',
     ];
 
     public function user()
@@ -25,8 +26,13 @@ class Comment extends Model
         return $this->belongsTo(Topic::class);
     }
 
+    public function replies()
+    {
+        return $this->hasMany(Comment::class, 'comment_id');
+    }
+
     public function comment()
     {
-        return $this->hasMany(Comment::class);
+        return $this->belongsTo(Comment::class, 'comment_id');
     }
 }

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->char('color', 6);;
             $table->string('description');
+            $table->string('image_url')->nullable();
         });
     }
 

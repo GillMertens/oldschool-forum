@@ -2,21 +2,31 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\User;
+use App\Models\Category;
+use App\Models\Topic;
+use App\Models\Tag;
+use App\Models\Comment;
+use App\Models\Reaction;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
-    public function run(): void
+    public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        $users = User::factory(10)->create();
+        $categories = Category::factory(5)->create();
+        $topics = Topic::factory(20)->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+
+        Comment::factory(10)->create();
+
+
+        Comment::factory(50)->canHaveCommentId()->create();
+
+
+        Reaction::factory(100)->create();
+
+        Tag::factory(10)->create();
     }
 }

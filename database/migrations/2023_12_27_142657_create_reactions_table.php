@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('emoji_code');
             $table->timestamps();
 
-            $table->foreignId('comment_id')->references('id')->on('comments')->onDelete('cascade');
-            $table->foreignId('topic_id')->references('id')->on('topics')->onDelete('cascade');
+            $table->foreignId('comment_id')->default(null)->nullable()->references('id')->on('comments')->onDelete('cascade');
+            $table->foreignId('topic_id')->default(null)->nullable()->references('id')->on('topics')->onDelete('cascade');
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }

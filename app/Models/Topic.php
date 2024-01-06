@@ -13,6 +13,7 @@ class Topic extends Model
         'name',
         'description',
         'category_id',
+        'user_id',
     ];
 
     public function category()
@@ -25,8 +26,13 @@ class Topic extends Model
         return $this->belongsToMany(Tag::class);
     }
 
-    public function comment()
+    public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }
