@@ -12,9 +12,9 @@ class DashboardController extends Controller
     {
         $topics = Topic::paginate(20);
 
-        if ($request->expectsJson()) {
+        if ($request->ajax()) {
             return [
-                'topics' => View::make('topics.list', ['topics' => $topics])->render(),
+                'topics' => View::make('topics.partials.index', ['topics' => $topics])->render(),
                 'next_page' => $topics->nextPageUrl()
             ];
         }

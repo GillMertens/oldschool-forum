@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
     {
         $users = User::factory(10)->create();
         $categories = Category::factory(5)->create();
-        $topics = Topic::factory(20)->create();
+        $topics = Topic::factory(100)->create();
 
 
         Comment::factory(10)->create();
