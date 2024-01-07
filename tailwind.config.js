@@ -33,6 +33,15 @@ module.exports = {
                 'primary': '#000000',
                 'primary-high': '#4d4d4d',
                 'primary-low': '#e6e6e6',
+            },
+            borderWidth: {
+                DEFAULT: '1px',
+                '0': '0',
+                '2': '2px',
+                '3': '3px',
+                '4': '4px',
+                '6': '6px',
+                '8': '8px',
             }
         },
     },

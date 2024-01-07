@@ -1,4 +1,4 @@
-<tr class="border-b-2">
+<tr class="border-b">
     <td class="px-1 py-2 pl-4">
         <span class="text-up-1 text-primary">{{ $topic->title }}</span>
         <div class="text-down-1 text-gray-500">

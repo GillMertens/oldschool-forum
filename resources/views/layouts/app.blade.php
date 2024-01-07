@@ -18,12 +18,12 @@
     <body class="font-sans antialiased">
         <div class="min-h-screen">
             @include('layouts.navigation')
-            <div class="main-outlet-wrapper max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex">
-                <div class="w-64 fixed h-screen overflow-hidden">
+            <div class="main-outlet-wrapper max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="w-52 lg:w-56 fixed h-screen overflow-hidden border-r-2">
                     @include('layouts.sidebar')
                 </div>
                 <!-- Page Content -->
-                <main class="flex-grow flex-shrink ml-64">
+                <main class="flex-grow flex-shrink ml-52 lg:ml-56 p-2 pl-8">
                     {{ $slot }}
                 </main>
             </div>
