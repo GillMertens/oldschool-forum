@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+tr.hover-first:hover > td:nth-child(1) {
+    border-color: blue;
+}
+
+tr.hover-second:hover > td:nth-child(2) {
+    border-color: red;
+}
