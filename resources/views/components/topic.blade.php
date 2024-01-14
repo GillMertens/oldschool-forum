@@ -1,8 +1,8 @@
-<tr class="border-b">
-    <td class="px-1 py-2 pl-4">
+<tr class="border-b cursor-pointer hover-first" onclick="window.location.href = '{{ route('topics.show', $topic->slug) }}'">
+    <td class="px-1 py-2 pl-4 border-l-4 border-transparent box-border">
         <span class="text-up-1 text-primary">{{ $topic->title }}</span>
         <div class="text-down-1 text-gray-500">
-            <div style="display: flex; align-items: center;">
+            <div class="flex items-center">
                 <div style="width: 10px; height: 10px; background-color: #{{ $topic->category->color }}; margin-right: 8px;"></div>
                 <div>{{ $topic->category->name }}</div>
             </div>
