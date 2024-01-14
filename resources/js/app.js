@@ -45,3 +45,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
     observer.observe(sentinel);
 });
+
+document.querySelectorAll('.reply-button').forEach(function(button) {
+    button.addEventListener('click', function() {
+        let commentId = this.dataset.commentId;
+        let dropdown = document.getElementById('reply-dropdown-' + commentId);
+        dropdown.classList.toggle('hidden');
+    });
+});
+
+document.querySelectorAll('.reply-preview').forEach(function(preview) {
+    preview.addEventListener('click', function() {
+        let replyId = this.dataset.replyId;
+        let replyElement = document.getElementById('comment-' + replyId);
+        replyElement.scrollIntoView({ behavior: 'smooth' });
+    });
+});
