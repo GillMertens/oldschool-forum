@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var endOfContent = document.querySelector('#end-of-content');
 
     function loadMoreTopics(url) {
-        loading.style.display = 'block'; // Show the loading spinner
+        loading.style.display = 'flex'; // Show the loading spinner
 
         fetch(url, {
             headers: {
