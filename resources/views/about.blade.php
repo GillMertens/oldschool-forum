@@ -54,6 +54,17 @@
                     <a href="https://stackoverflow.com/questions/tagged/laravel" class="text-blue-500 hover:underline">https://stackoverflow.com/questions/tagged/laravel</a>
                 </div>
             </div>
+
+            <div class="mt-8 mb-8 w-full bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
+                <h2 class="font-semibold text-xl text-gray-800 leading-tight mb-4">
+                    Github link
+                </h2>
+                <p>
+                    <a href="https://github.com/GillMertens/oldschool-forum" class="text-blue-500 underline">My github link</a>
+                </p>
+            </div>
+
+            https://github.com/GillMertens/oldschool-forum
         </div>
     </div>
 </x-app-layout>
