@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\ReactionEmoji;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Category;
@@ -24,9 +25,17 @@ class DatabaseSeeder extends Seeder
 
         Comment::factory(50)->canHaveCommentId()->create();
 
+        $emojiCodes = ['1F600', '1F603', '1F604', '1F601', '1F606', '1F605', '1F923'];
+
+        foreach ($emojiCodes as $emojiCode) {
+            ReactionEmoji::create(['emoji_code' => $emojiCode]);
+        }
+
 
         Reaction::factory(100)->create();
 
         Tag::factory(10)->create();
+
+
     }
 }

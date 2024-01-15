@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('reactions', function (Blueprint $table) {
             $table->id();
-            $table->string('emoji_code');
             $table->timestamps();
 
+            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreignId('reaction_emoji_id')->references('id')->on('reaction_emoji')->onDelete('cascade');
             $table->foreignId('comment_id')->default(null)->nullable()->references('id')->on('comments')->onDelete('cascade');
             $table->foreignId('topic_id')->default(null)->nullable()->references('id')->on('topics')->onDelete('cascade');
-            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

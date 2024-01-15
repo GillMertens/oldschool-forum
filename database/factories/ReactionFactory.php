@@ -24,10 +24,10 @@ class ReactionFactory extends Factory
         }
 
         return [
-            'emoji_code' => $this->faker->randomElement(['1F600', '1F603', '1F604', '1F601', '1F606', '1F605', '1F923']),
+            'reaction_emoji_id' => \App\Models\ReactionEmoji::pluck('id')->random(),
+            'user_id' => \App\Models\User::pluck('id')->random(),
             'comment_id' => $comment_id,
             'topic_id' => $topic_id,
-            'user_id' => \App\Models\User::pluck('id')->random(),
         ];
     }
 }

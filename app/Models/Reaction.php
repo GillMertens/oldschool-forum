@@ -9,18 +9,13 @@ class Reaction extends Model
 {
     use HasFactory;
 
+    public function reactable()
+    {
+        return $this->morphTo();
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);
-    }
-
-    public function topic()
-    {
-        return $this->belongsTo(Topic::class);
-    }
-
-    public function comment()
-    {
-        return $this->belongsTo(Comment::class);
     }
 }
