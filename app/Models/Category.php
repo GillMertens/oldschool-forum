@@ -18,7 +18,7 @@ class Category extends Model
         'image_url'
     ];
 
-    public function topic()
+    public function topics()
     {
         return $this->hasMany(Topic::class);
     }
