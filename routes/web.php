@@ -29,6 +29,8 @@ Route::get('/topics/{topic:slug}', [TopicController::class, 'show'])->name('topi
 Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
 
 
+Route::post('/users/{user}/toggleAdmin', [DashboardController::class, 'toggleAdmin'])->name('users.toggleAdmin');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

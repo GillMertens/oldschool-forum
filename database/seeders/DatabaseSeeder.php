@@ -19,6 +19,17 @@ class DatabaseSeeder extends Seeder
         Role::create(['name' => 'admin']);
         Role::create(['name' => 'user']);
 
+        $admin = User::create([
+            'first_name' => 'Kevin',
+            'last_name' => 'Felix',
+            'username' => 'admin',
+            'email' => 'admin@ehb.be',
+            'email_verified_at' => now(),
+            'password' => bcrypt('Password!321'),
+            'remember_token' => \Illuminate\Support\Str::random(10),
+        ]);
+        $admin->roles()->attach(Role::where('name', 'admin')->first()->id);
+
         $users = User::factory(10)->create();
         $categories = Category::factory(3)->create();
         Tag::factory(10)->create();
