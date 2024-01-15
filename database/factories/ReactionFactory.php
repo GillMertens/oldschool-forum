@@ -2,7 +2,11 @@
 
 namespace Database\Factories;
 
+use App\Models\Comment;
 use App\Models\Reaction;
+use App\Models\ReactionEmoji;
+use App\Models\Topic;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ReactionFactory extends Factory
@@ -11,23 +15,36 @@ class ReactionFactory extends Factory
 
     public function definition()
     {
-        $topic_id = null;
-        $comment_id = null;
+        // Fetch all necessary data once
+        $userIds = User::pluck('id')->all();
+        $topicIds = Topic::pluck('id')->all();
+        $commentIds = Comment::pluck('id')->all();
+        $reactionEmojiIds = ReactionEmoji::pluck('id')->all();
 
-        // Randomly decide whether the reaction is for a comment or a topic
-        if (rand(0, 1) === 0 && \App\Models\Comment::exists()) {
-            // The reaction is for a comment
-            $comment_id = \App\Models\Comment::pluck('id')->random();
-        } elseif (\App\Models\Topic::exists()) {
-            // The reaction is for a topic
-            $topic_id = \App\Models\Topic::pluck('id')->random();
-        }
+        // Randomly select reactable_type
+        $reactable_type = $this->faker->randomElement(['App\\Models\\Topic', 'App\\Models\\Comment']);
+
+        // Select a random ID based on reactable_type
+        $reactable_id = $reactable_type === 'App\\Models\\Topic'
+            ? $this->faker->randomElement($topicIds)
+            : $this->faker->randomElement($commentIds);
+
+        // Initialize user_id
+        $user_id = null;
+
+        // Find a unique combination
+        do {
+            $user_id = $this->faker->randomElement($userIds);
+        } while (Reaction::where('user_id', $user_id)
+            ->where('reactable_type', $reactable_type)
+            ->where('reactable_id', $reactable_id)
+            ->exists());
 
         return [
-            'reaction_emoji_id' => \App\Models\ReactionEmoji::pluck('id')->random(),
-            'user_id' => \App\Models\User::pluck('id')->random(),
-            'comment_id' => $comment_id,
-            'topic_id' => $topic_id,
+            'reaction_emoji_id' => $this->faker->randomElement($reactionEmojiIds),
+            'user_id' => $user_id,
+            'reactable_type' => $reactable_type,
+            'reactable_id' => $reactable_id,
         ];
     }
 }

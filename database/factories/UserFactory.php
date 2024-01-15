@@ -36,6 +36,18 @@ class UserFactory extends Factory
     }
 
     /**
+     * Configure the model factory.
+     *
+     * @return $this
+     */
+    public function configure()
+    {
+        return $this->afterCreating(function ($user) {
+            $user->roles()->attach(2);
+        });
+    }
+
+    /**
      * Indicate that the model's email address should be unverified.
      */
     public function unverified(): static

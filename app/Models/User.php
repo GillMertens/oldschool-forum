@@ -45,6 +45,13 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    protected static function booted()
+    {
+        static::created(function ($user) {
+            $user->roles()->attach(2); // Attach the user role (ID 2) to the user
+        });
+    }
+
     public function topic()
     {
         return $this->hasMany(Topic::class);
@@ -60,8 +67,8 @@ class User extends Authenticatable
         return $this->hasMany(Reaction::class);
     }
 
-    public function role()
+    public function roles()
     {
-        return $this->belongsTo(Role::class);
+        return $this->belongsToMany(Role::class);
     }
 }

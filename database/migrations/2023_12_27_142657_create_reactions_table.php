@@ -13,12 +13,14 @@ return new class extends Migration
     {
         Schema::create('reactions', function (Blueprint $table) {
             $table->id();
+            $table->string('reactable_type')->default('null');
+            $table->unsignedBigInteger('reactable_id');
             $table->timestamps();
 
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreignId('reaction_emoji_id')->references('id')->on('reaction_emoji')->onDelete('cascade');
-            $table->foreignId('comment_id')->default(null)->nullable()->references('id')->on('comments')->onDelete('cascade');
-            $table->foreignId('topic_id')->default(null)->nullable()->references('id')->on('topics')->onDelete('cascade');
+
+            $table->unique(['user_id', 'reactable_type', 'reactable_id']);
         });
     }
 

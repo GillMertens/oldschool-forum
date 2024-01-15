@@ -1,4 +1,13 @@
 <x-app-layout>
+    <div class="flex justify-between my-2">
+        <div>Filters placeholder</div>
+        <div>
+            <button class="open-drawer-button bg-blue-500 text-white px-4 py-2 rounded">+ Create Topic</button>
+            <div id="drawer" class="fixed z-50 bottom-0 left-0 w-full h-fit py-4 px-8 border-t-8 border-t-blue-600 bg-white transform translate-y-full transition-transform">
+                @include('topics.partials.create')
+            </div>
+        </div>
+    </div>
     <table class="w-full">
         <thead class="border-b-[2px]">
         <tr class="text-primary-high">

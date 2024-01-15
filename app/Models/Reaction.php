@@ -9,6 +9,8 @@ class Reaction extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['reaction_emoji_id', 'user_id', 'reactable_type', 'reactable_id'];
+
     public function reactable()
     {
         return $this->morphTo();

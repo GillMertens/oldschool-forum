@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class="border-b pb-4">
-        <header class="border-b pb-4">
+        <header>
             <h1 class="text-up-4 font-bold">{{ $topic->title }}</h1>
             <div class="text-down-1 text-gray-500">
                 <div class="flex items-center">
@@ -21,10 +21,37 @@
         <div class="mt-4">
             <p class="">{{ $topic->body }}</p>
         </div>
-        <div>
-            <div class="mt-4 ml-auto flex gap-2">
-                <button class="like-button" data-comment-id="{{ $topic->id }}">Like</button>
-                <button class="comment-button" data-comment-id="{{ $topic->id }}">Antwoorden</button>
+        <div class="w-full flex justify-end">
+            <div class="mt-4 ml-auto flex relative">
+                @foreach($reactionEmojis as $emoji)
+                    @php
+                        $count = $topic->reactions->where('reaction_emoji_id', $emoji->id)->count();
+                        $userReaction = $topic->reactions->where('reaction_emoji_id', $emoji->id)->where('user_id', auth()->id())->first();
+                    @endphp
+                    @if($count > 0)
+                        <form action="{{ route('reactions.store') }}" method="POST" class="flex items-center mx-1 px-1 rounded hover:bg-gray-100 {{ $userReaction ? 'bg-blue-200' : '' }}">
+                            @csrf
+                            <input type="hidden" name="emoji_id" value="{{ $emoji->id }}">
+                            <input type="hidden" name="reactable_type" value="App\Models\Topic">
+                            <input type="hidden" name="reactable_id" value="{{ $topic->id }}">
+                            <button type="submit">{!! '&#x' . substr($emoji->emoji_code, 2) . ';' !!}</button>
+                            <span class="ml-1">{{ $count }}</span>
+                        </form>
+                    @endif
+                @endforeach
+                <button class="like-button mx-1 px-2" data-id="{{ $topic->id }}">Like</button>
+                <div id="emoji-popup-{{ $topic->id }}" class="emoji-popup absolute left-1/2 transform -translate-x-1/2 -translate-y-full mt-2 bg-white border rounded shadow flex hidden">
+                    @foreach($reactionEmojis as $emoji)
+                        <form action="{{ route('reactions.store') }}" method="POST" class="p-2 hover:bg-gray-200 cursor-pointer">
+                            @csrf
+                            <input type="hidden" name="emoji_id" value="{{ $emoji->id }}">
+                            <input type="hidden" id="reactable_type" name="reactable_type" value="App\Models\Topic">
+                            <input type="hidden" name="reactable_id" value="{{ $topic->id }}">
+                            <button type="submit">{!! '&#x' . substr($emoji->emoji_code, 2) . ';' !!}</button>
+                        </form>
+                    @endforeach
+                </div>
+                <button data-type="comment" class="open-drawer-button bg-gray-500 text-white px-3 py-1.5">Antwoorden</button>
             </div>
         </div>
     </div>
@@ -44,9 +71,36 @@
                 @if($comment->replies->count() !== 0)
                     <button class="reply-button" data-comment-id="{{ $comment->id }}">Replies</button>
                 @endif
-                <div class="ml-auto flex gap-2">
-                    <button class="like-button" data-comment-id="{{ $comment->id }}">Like</button>
-                    <button class="comment-button" data-comment-id="{{ $comment->id }}">Antwoorden</button>
+                <div class="ml-auto flex relative">
+                    @foreach($reactionEmojis as $emoji)
+                        @php
+                            $count = $comment->reactions->where('reaction_emoji_id', $emoji->id)->count();
+                            $userReaction = $comment->reactions->where('reaction_emoji_id', $emoji->id)->where('user_id', auth()->id())->first();
+                        @endphp
+                        @if($count > 0)
+                            <form action="{{ route('reactions.store') }}" method="POST" class="flex items-center mx-1 px-1 rounded hover:bg-gray-100 {{ $userReaction ? 'bg-blue-200' : '' }}">
+                                @csrf
+                                <input type="hidden" name="emoji_id" value="{{ $emoji->id }}">
+                                <input type="hidden" id="reactable_type" name="reactable_type" value="App\Models\Comment">
+                                <input type="hidden" name="reactable_id" value="{{ $comment->id }}">
+                                <button type="submit">{!! '&#x' . substr($emoji->emoji_code, 2) . ';' !!}</button>
+                                <span class="ml-1">{{ $count }}</span>
+                            </form>
+                        @endif
+                    @endforeach
+                    <button class="like-button mx-1 px-2" data-id="{{ $comment->id }}">Like</button>
+                    <div id="emoji-popup-{{ $comment->id }}" class="emoji-popup absolute left-1/2 transform -translate-x-1/2 -translate-y-full mt-2 bg-white border rounded shadow flex hidden">
+                        @foreach($reactionEmojis as $emoji)
+                            <form action="{{ route('reactions.store') }}" method="POST" class="p-2 hover:bg-gray-200 cursor-pointer">
+                                @csrf
+                                <input type="hidden" name="emoji_id" value="{{ $emoji->id }}">
+                                <input type="hidden" name="reactable_type" value="App\Models\Comment">
+                                <input type="hidden" name="reactable_id" value="{{ $comment->id }}">
+                                <button type="submit">{!! '&#x' . substr($emoji->emoji_code, 2) . ';' !!}</button>
+                            </form>
+                        @endforeach
+                    </div>
+                    <button data-type="reply" data-comment-id="{{ $comment->id }}" class="open-drawer-button bg-gray-500 text-white px-3 py-1.5">Antwoorden</button>
                 </div>
             </div>
             @if($comment->replies->count() > 0)
@@ -67,5 +121,8 @@
             @endif
         </div>
     @endforeach
+    <div id="drawer" class="fixed z-50 bottom-0 left-0 w-full h-fit py-4 px-8 border-t-8 border-t-blue-600 bg-white transform translate-y-full transition-transform">
+        @include('comments.partials.create')
+    </div>
     <div class="mb-[100em]"></div>
 </x-app-layout>

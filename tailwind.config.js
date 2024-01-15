@@ -42,6 +42,9 @@ module.exports = {
                 '4': '4px',
                 '6': '6px',
                 '8': '8px',
+            },
+            backgroundColor: {
+                'gray-200': '#edf2f7',
             }
         },
     },
