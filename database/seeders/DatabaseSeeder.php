@@ -30,6 +30,17 @@ class DatabaseSeeder extends Seeder
         ]);
         $admin->roles()->attach(Role::where('name', 'admin')->first()->id);
 
+        $user = User::create([
+            'first_name' => 'Gill',
+            'last_name' => 'mertens',
+            'username' => 'gill-sans',
+            'email' => 'mertensgill@outlook.com',
+            'email_verified_at' => now(),
+            'password' => bcrypt('localhost'),
+            'remember_token' => \Illuminate\Support\Str::random(10),
+        ]);
+        $user->roles()->attach(Role::where('name', 'user')->first()->id);
+
         $users = User::factory(10)->create();
         $categories = Category::factory(3)->create();
         Tag::factory(10)->create();

@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\FaqAnswerController;
+use App\Http\Controllers\FaqController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ReactionController;
@@ -28,8 +30,20 @@ Route::get('/topics/{topic:slug}', [TopicController::class, 'show'])->name('topi
 
 Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
 
+Route::get('/about', function () {
+    return view('about');
+})->name('about');
 
-Route::post('/users/{user}/toggleAdmin', [DashboardController::class, 'toggleAdmin'])->name('users.toggleAdmin');
+
+Route::post('/users/{user}/toggleAdmin', [DashboardController::class, 'toggleAdmin'])->name('users.toggleAdmin')->middleware('admin');
+
+
+Route::get('/faq', [FaqController::class, 'index'])->name('faq.index');
+
+Route::post('/faq', [FaqController::class, 'store'])->name('faq.store')->middleware('admin');
+
+Route::post('/faq-answers', [FaqAnswerController::class, 'store'])->name('faqAnswer.store')->middleware('admin');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
