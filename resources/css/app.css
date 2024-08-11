@@ -9,3 +9,43 @@ tr.hover-first:hover > td:nth-child(1) {
 tr.hover-second:hover > td:nth-child(2) {
     border-color: red;
 }
+
+h1 {
+    @apply text-4xl;
+    color: #1a202c;
+}
+
+h2 {
+    @apply text-3xl;
+    color: #1a202c;
+}
+
+h3 {
+    @apply text-2xl;
+    color: #1a202c;
+}
+
+h4 {
+    @apply text-xl;
+    color: #1a202c;
+}
+
+h5 {
+    @apply text-lg;
+    color: #1a202c;
+}
+
+p {
+    @apply text-base;
+    color: #1a202c;
+}
+
+a {
+    @apply text-blue-500;
+}
+
+a:hover {
+    @apply text-blue-700;
+}
+
+
