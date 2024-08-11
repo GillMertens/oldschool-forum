@@ -10,7 +10,11 @@
     </td>
     <td class="px-1 py-2">
         <div class="flex justify-center items-center">
-            <div class="w-[24px] h-[24px] bg-gray-500 rounded-full"></div>
+            <div class="w-8 h-8 bg-gray-200 rounded-full">
+                @if ($topic->user->img)
+                    <img id="preview" src="{{ asset($topic->user->img) }}" alt="Profile picture" class="w-8 h-8 rounded-full object-cover" onerror="this.style.display='none'">
+                @endif
+            </div>
         </div>
     </td>
     <td class="px-1 py-2 text-center">

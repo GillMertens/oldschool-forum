@@ -21,12 +21,27 @@
 
             <!-- Add this box for the user's information -->
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="flex flex-col gap-4">
-                    <div>
-                        <h6>Full name</h6>
-                        <h5>{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</h5>
+                <div class="flex">
+                    <div class="flex flex-col gap-4 w-1/2">
+                        <div>
+                            <h6>Full name</h6>
+                            <h5>{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</h5>
+                        </div>
+                        <div>
+                            <h6>Birthday</h6>
+                            <h5>{{ Auth::user()->dob }}</h5>
+                        </div>
                     </div>
-                    <p>Birthday: {{ Auth::user()->birthday }}</p>
+                    <div class="flex flex-col gap-4  w-1/2">
+                        <div>
+                            <h6>Email</h6>
+                            <h5>{{ Auth::user()->email }}</h5>
+                        </div>
+                        <div>
+                            <h6>Member since</h6>
+                            <h5>{{ Auth::user()->created_at->diffForHumans() }}</h5>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
