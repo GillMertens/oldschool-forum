@@ -2,10 +2,10 @@
     <label for="upload" class="block text-sm font-medium text-gray-700">Profile picture</label>
     <div class="flex items-center gap-2 mt-1">
         <div class="rounded-md bg-gray-300">
-            @if (auth()->user()->img)
-                <img id="preview" src="{{ auth()->user()->img }}" alt="Profile picture" class="w-24 h-24 rounded-md object-cover">
+            @if (auth()->check() && auth()->user()->img)
+                <img id="preview" src="{{ auth()->user()->img }}" alt="Profile picture" class="w-24 h-24 rounded-md object-cover" onerror="this.style.display='none'">
                 @else
-                <img id="preview" src="" alt="" class="w-24 h-24 rounded-md object-cover">
+                <img id="preview" src="" alt="" class="w-24 h-24 rounded-md object-cover" onerror="this.style.display='none'">
             @endif
         </div>
         <div>
