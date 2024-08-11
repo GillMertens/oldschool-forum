@@ -30,6 +30,7 @@
                     <li>Set up your <code>.env</code> file according to your environment.</li>
                     <li>Run the migrations: <code>php artisan migrate</code></li>
                     <li>(Optional) Seed the database: <code>php artisan db:seed</code></li>
+                    <li>Make a symbolic link for the storage <code>php artisan storage:link</code></li>
                 </ol>
             </div>
 
