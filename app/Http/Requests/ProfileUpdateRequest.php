@@ -20,6 +20,7 @@ class ProfileUpdateRequest extends FormRequest
             'last_name' => ['string', 'max:255'],
             'username' => ['string', 'max:255', 'unique:users,username,' . $this->user()->id],
             'email' => ['string', 'lowercase', 'email', 'max:255', 'unique:users,email,' . $this->user()->id],
+            'img' => ['nullable', 'file', 'mimes:jpeg,png,jpg,gif,svg', 'max:3072'],
         ];
     }
 }

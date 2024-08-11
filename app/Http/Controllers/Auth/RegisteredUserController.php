@@ -36,7 +36,12 @@ class RegisteredUserController extends Controller
             'username' => ['required', 'string', 'max:255', 'unique:'.User::class],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'img' => ['nullable', 'file', 'mimes:jpeg,png,jpg,gif,svg', 'max:3072'],
         ]);
+
+        if ($request->hasFile('img')) {
+            $path = $request->file('img')->storePublicly('img', 'public');
+        }
 
         $user = User::create([
             'first_name' => $request->first_name,
@@ -44,6 +49,7 @@ class RegisteredUserController extends Controller
             'username' => $request->username,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'img' => 'storage/' . $path ?? null,
         ]);
 
         event(new Registered($user));
