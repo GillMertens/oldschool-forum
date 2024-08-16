@@ -22,10 +22,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/',[DashboardController::class, 'index'])->name('dashboard');
+Route::post('/', [DashboardController::class, 'index'])->name('dashboard.more');
 Route::get('/topics/{topic:slug}', [TopicController::class, 'show'])->name('topics.show');
 Route::get('/about', function () {return view('about');})->name('about');
 Route::get('/faq', [FaqController::class, 'index'])->name('faq.index');
 Route::get('/categories/{name}', [CategoryController::class, 'show'])->name('categories.show');
+Route::post('/categories/{name}', [CategoryController::class, 'show'])->name('categories.more');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile/{username}', [ProfileController::class, 'show'])->name('profile.show');

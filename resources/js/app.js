@@ -14,15 +14,24 @@ document.addEventListener('DOMContentLoaded', function() {
     var container = document.querySelector('#topics-container');
     var sentinel = document.querySelector('#sentinel');
     var loading = document.querySelector('#loading');
+    console.log(loading);
     var endOfContent = document.querySelector('#end-of-content');
 
-    function loadMoreTopics(url) {
+    function loadMoreTopics(url, categoryId) {
         loading.style.display = 'flex'; // Show the loading spinner
+
+        let body = {};
+        if (categoryId) {
+            body.category_id = categoryId;
+        }
 
         fetch(url, {
             headers: {
-                'X-Requested-With': 'XMLHttpRequest'
-            }
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            },
+            body: JSON.stringify(body),
+            method: 'POST'
         })
             .then(response => response.json())
             .then(data => {
@@ -39,7 +48,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     var observer = new IntersectionObserver(function(entries) {
         if (entries[0].isIntersecting) {
-            loadMoreTopics(sentinel.dataset.url);
+            let categoryId = sentinel.dataset.hasOwnProperty('category') ? sentinel.dataset.category : null;
+            console.log(sentinel.dataset.url, categoryId);
+            loadMoreTopics(sentinel.dataset.url, categoryId);
         }
     }, { threshold: 0.1 });
 
