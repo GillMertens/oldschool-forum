@@ -43,9 +43,17 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
                 <h2 class="font-semibold text-lg text-gray-800 leading-tight mb-4">FAQs</h2>
                 @foreach($faqs as $faq)
-                    <div class="mb-4">
-                        <h3 class="text-lg font-semibold">{{ $faq->question }}</h3>
-                        <p class="mb-2">{{ $faq->category }}</p>
+                    <div class="mb-4 flex flex-col gap-4">
+
+                        <div class="border border-gray-300 p-2 border rounded-t-lg">
+                            <h3 class="text-lg font-semibold">{{ $faq->question }}</h3>
+                            <p>{{ $faq->category }}</p>
+                        </div>
+                        @foreach ($faq->faqAnswers as $answer)
+                            <div class="border-b border-gray-300 px-2">
+                                <p>{{ $answer->answer }}</p>
+                            </div>
+                        @endforeach
                         <form action="{{ route('faqAnswer.store') }}" method="POST">
                             @csrf
                             <input type="hidden" name="faq_id" value="{{ $faq->id }}">

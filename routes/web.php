@@ -42,8 +42,8 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('admin')->group(function () {
     Route::post('/users/{user}/toggleAdmin', [DashboardController::class, 'toggleAdmin'])->name('users.toggleAdmin');
-    Route::get('/faq/create', [FaqController::class, 'create'])->name('faq.create');
-    Route::get('/faq-answers/create', [FaqAnswerController::class, 'create'])->name('faqAnswer.create');
+    Route::post('/faq', [FaqController::class, 'store'])->name('faq.store');
+    Route::post('/faq-answers/create', [FaqAnswerController::class, 'store'])->name('faqAnswer.store');
 });
 
 require __DIR__.'/auth.php';
