@@ -19,11 +19,11 @@
         <div class="min-h-screen" >
             @include('layouts.navigation')
             <div class="main-outlet-wrapper max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div :class="{'hidden': sidebarOpen, 'inline': ! sidebarOpen }" class="w-52 lg:w-56 fixed h-screen overflow-hidden border-r-2">
+                <div :class="{'hidden': sidebarOpen, 'inline': ! sidebarOpen }" class="w-52 lg:w-56 fixed h-screen overflow-hidden">
                     @include('layouts.sidebar')
                 </div>
                 <!-- Page Content -->
-                <main :class="{'ml-0 lg:ml-0': sidebarOpen, 'ml-52 lg:ml-56': ! sidebarOpen }" class="flex-grow flex-shrink ml-52 lg:ml-56 p-2 pl-8">
+                <main :class="{'ml-0 lg:ml-0': sidebarOpen, 'ml-52 lg:ml-56': ! sidebarOpen }" class="flex-grow flex-shrink ml-52 lg:ml-56 p-2 pl-8 border-l-2">
                     {{ $slot }}
                 </main>
             </div>
