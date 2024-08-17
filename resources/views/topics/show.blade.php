@@ -10,17 +10,19 @@
             </div>
         </header>
         <div class="mt-4">
-            <div class="flex items-center">
-                <div class="w-12 h-12 bg-gray-200 rounded-full">
-                    @if ($topic->user->img)
-                        <img id="preview" src="{{ asset($topic->user->img) }}" alt="Profile picture" class="w-12 h-12 rounded-full object-cover">
-                    @endif
+            <a href="{{ route('profile.show', ['username' => $topic->user->username]) }}" class="flex items text-black">
+                <div class="flex items-center">
+                    <div class="w-12 h-12 bg-gray-200 rounded-full">
+                        @if ($topic->user->img)
+                            <img id="preview" src="{{ asset($topic->user->img) }}" alt="Profile picture" class="w-12 h-12 rounded-full object-cover">
+                        @endif
+                    </div>
+                    <div class="ml-2">
+                        <div class="text font-bold">{{ $topic->user->username }}</div>
+                        <div class="text-down-1 text-gray-500">{{ $topic->created_at->diffForHumans() }}</div>
+                    </div>
                 </div>
-                <div class="ml-2">
-                    <div class="text font-bold">{{ $topic->user->username }}</div>
-                    <div class="text-down-1 text-gray-500">{{ $topic->created_at->diffForHumans() }}</div>
-                </div>
-            </div>
+            </a>
         </div>
         <div class="mt-4">
             <p class="">{{ $topic->body }}</p>
@@ -62,15 +64,17 @@
     @foreach($topic->comments as $comment)
         <div class="mt-4 pb-4 border-b transition" id="comment-{{ $comment->id }}">
             <div class="flex items-center">
-                <div class="w-12 h-12 bg-gray-200 rounded-full">
-                    @if ($comment->user->img)
-                        <img id="preview" src="{{ asset($comment->user->img) }}" alt="Profile picture" class="w-12 h-12 rounded-full object-cover">
-                    @endif
-                </div>
-                <div class="ml-2">
-                    <div class="font-bold">{{ $comment->user->username }}</div>
-                    <div class="text-down-1 text-gray-500">{{ $comment->created_at->diffForHumans() }}</div>
-                </div>
+                <a href="{{ route('profile.show', ['username' => $comment->user->username]) }}" class="flex items text-black">
+                    <div class="w-12 h-12 bg-gray-200 rounded-full">
+                        @if ($comment->user->img)
+                            <img id="preview" src="{{ asset($comment->user->img) }}" alt="Profile picture" class="w-12 h-12 rounded-full object-cover">
+                        @endif
+                    </div>
+                    <div class="ml-2">
+                        <div class="font-bold">{{ $comment->user->username }}</div>
+                        <div class="text-down-1 text-gray-500">{{ $comment->created_at->diffForHumans() }}</div>
+                    </div>
+                </a>
             </div>
             <div class="mt-4">
                 <p class="">{{ $comment->body }}</p>
